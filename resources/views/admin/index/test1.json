@@ -1,0 +1,113 @@
+{
+	"resultcode": "200",
+	"reason": "successed!",
+	"result": {
+		"sk": {
+			"temp": "32",
+			"wind_direction": "南风",
+			"wind_strength": "3级",
+			"humidity": "18%",
+			"time": "20:09"
+		},
+		"today": {
+			"temperature": "19℃~35℃",
+			"weather": "晴",
+			"weather_id": {
+				"fa": "00",
+				"fb": "00"
+			},
+			"wind": "西南风微风",
+			"week": "星期四",
+			"city": "北京",
+			"date_y": "2018年05月31日",
+			"dressing_index": "炎热",
+			"dressing_advice": "天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。",
+			"uv_index": "很强",
+			"comfort_index": "",
+			"wash_index": "较适宜",
+			"travel_index": "较适宜",
+			"exercise_index": "较适宜",
+			"drying_index": ""
+		},
+		"future": {
+			"day_20180531": {
+				"temperature": "19℃~35℃",
+				"weather": "晴",
+				"weather_id": {
+					"fa": "00",
+					"fb": "00"
+				},
+				"wind": "西南风微风",
+				"week": "星期四",
+				"date": "20180531"
+			},
+			"day_20180601": {
+				"temperature": "21℃~36℃",
+				"weather": "晴",
+				"weather_id": {
+					"fa": "00",
+					"fb": "00"
+				},
+				"wind": "南风微风",
+				"week": "星期五",
+				"date": "20180601"
+			},
+			"day_20180602": {
+				"temperature": "21℃~35℃",
+				"weather": "多云",
+				"weather_id": {
+					"fa": "01",
+					"fb": "01"
+				},
+				"wind": "西南风3-5级",
+				"week": "星期六",
+				"date": "20180602"
+			},
+			"day_20180603": {
+				"temperature": "19℃~31℃",
+				"weather": "多云转晴",
+				"weather_id": {
+					"fa": "01",
+					"fb": "00"
+				},
+				"wind": "西北风微风",
+				"week": "星期日",
+				"date": "20180603"
+			},
+			"day_20180604": {
+				"temperature": "20℃~34℃",
+				"weather": "多云",
+				"weather_id": {
+					"fa": "01",
+					"fb": "01"
+				},
+				"wind": "南风微风",
+				"week": "星期一",
+				"date": "20180604"
+			},
+			"day_20180605": {
+				"temperature": "21℃~35℃",
+				"weather": "多云",
+				"weather_id": {
+					"fa": "01",
+					"fb": "01"
+				},
+				"wind": "西南风3-5级",
+				"week": "星期二",
+				"date": "20180605"
+			},
+			"day_20180606": {
+				"temperature": "21℃~36℃",
+				"weather": "晴",
+				"weather_id": {
+					"fa": "00",
+					"fb": "00"
+				},
+				"wind": "南风微风",
+				"week": "星期三",
+				"date": "20180606"
+			}
+		}
+	},
+	"error_code": 0
+}

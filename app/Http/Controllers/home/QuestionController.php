@@ -42,7 +42,6 @@ class QuestionController extends Controller
     public function store(Request $request,Question $question,ImageUploadHandler $uploader)
     {
 
-        dd($request->all());
         $data=$request->all();
         $result=$uploader->save($request->image, 'image',450,545);
         $data['user_id']=Auth::id();

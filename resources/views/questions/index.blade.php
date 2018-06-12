@@ -13,8 +13,8 @@
                         <img src="{{$question->back_image}}" alt="" class="img-responsive">
                         <div class="events-grid">
                             <div class="events-gr">
-                                <span>{{$question->user->name}}</span>
-                                <h4>{{$question->title}}</h4>
+                                <span>{{$question->user['name']}}</span>
+                                <h4>{{$question['title']}}</h4>
                                 <ul>
                                     
                                     <li><i class="glyphicon glyphicon-heart"></i>10</li>
@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="grid-ev"></div>             
+                        <div class="grid-ev"></div> 
                         </div>
                     </a>
                 </div>

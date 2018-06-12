@@ -45,8 +45,6 @@
         </script>
 
     </head>
-
-
     <body>
 
         <div class="wrapper-page">
@@ -54,18 +52,18 @@
                 <div class="panel-heading"> 
                    <h3 class="text-center m-t-10"> Sign In to <strong>CtoBlog</strong> </h3>
                 </div> 
-
+                {{dump($errors)}}
                 <div class="panel-body">
-                    <form class="form-horizontal m-t-10 p-20 p-b-0" action="{{action('admin\LoginController@store')}}" method="post">
-                                            
+                    <form class="form-horizontal m-t-10 p-20 p-b-0" action="{{action('admin\AdminLoginController@store')}}" method="post">
+                        {{ csrf_field() }}  
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" placeholder="Username">
+                                <input class="form-control" type="text" name='name' placeholder="Username">
                             </div>
                         </div>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" placeholder="Password">
+                                <input class="form-control" type="password" name="password" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-group ">

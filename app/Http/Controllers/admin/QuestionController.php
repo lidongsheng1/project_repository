@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Question;
 
 class QuestionController extends Controller
 {
@@ -14,7 +15,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return "ravensb";
+        $questions=Question::where('is_hidden','0')->with('user')->get();
+
+        return view('admin.question.index',compact('questions'));
     }
 
     /**
@@ -80,6 +83,22 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question=Question::find($id);
+        $question->is_hidden='1';
+        $question->save();
+        return redirect(action('admin\QuestionController@index'));
+    }
+
+    public function recycle(){
+        $questions=Question::where('is_hidden','1')->with('user')->get();
+        return view('admin.question.recycle',compact('questions'));
+    }
+
+    public function recovery($id){
+        $user=Question::find($id);
+        $user->is_hidden='0';
+        if($user->save()){
+            return redirect(action('admin\QuestionController@recycle'));
+        }
     }
 }

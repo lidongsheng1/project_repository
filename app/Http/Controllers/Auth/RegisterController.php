@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\UserDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -55,7 +56,7 @@ class RegisterController extends Controller
                     return $fail($attribute.' is unique.');
                 }
             }],
-            'password1' => 'required|string|min:6|confirmed',
+            'password1' => 'required|string|min:6',
             'phone'=>'required|regex:/^1[34578]\d{9}$/|unique:users',
             'key'=>'required',
             'code'=>['min:4',function($attribute, $value, $fail) use($data) {
@@ -76,11 +77,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
        // dd($data);
-        return User::create([
+        $result=User::create([
             'name' => $data['name'],
             'email' => $data['email1'],
             'password' => bcrypt($data['password1']),
             'phone' => $data['phone'],
         ]);
+
+        UserDetail::create(['user_id'=>$result->id]);
+
+        return $result;
     }
 }

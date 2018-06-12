@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('home/css/component.css')}}" />
 </head>
 <body>
- <div class="header">
+ <div class="header" style="min-height:700px">
 
         <nav class="navbar navbar-default animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
         <div class="container">
@@ -49,7 +49,8 @@
             <li ><a id="home" href="\">Home</a></li>
             <li><a id="question" href="{{action('home\QuestionController@index')}}">Question</a></li>
              <li><a id="topic" href="{{action('home\TopicsController@index')}}">Topic</a></li>
-              <li><a href="typo.html">Article</a></li>
+              <li><a id="article" href="{{action('home\ArticleController@index')}}">Article</a></li>
+              <li><a href="">Music</a></li>
             @if(Auth::user())
                 <li>
                   <a href="{{route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -92,7 +93,7 @@
 
  @yield('content')
 <!--footer-->
-    <div class="footer">
+    <div class="footer" id="footer">
         <div class="footer-middle">
             <div class="container">
                 <div class="col-md-4 footer-middle-in animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
@@ -405,11 +406,7 @@
           <div class="form-group">
               <label for="selects" class="control-label">Topic</label>
               <br />
-              <select id="selects" class="form-control js-example-basic-multiple js-data-example-ajax" name="articleTopics[]" multiple="multiple" required style="width:100%" >
-                  <option value="AL">Alabama</option>
-                  <option value="WY">Wyoming</option>
-                  <option value="a">ddsadsa</option>
-              </select>
+              
           </div>
           <div class="form-group{{ $errors->has('article_image') ? ' has-error' : '' }}">
             <label for="article_image" class="control-label">BackImage:</label>
@@ -423,9 +420,9 @@
           <div class="form-group">
             <label for="article_content" class="control-label">Content:</label>
             <input type="hidden" name="article_content" id="article_content">
-            <div id="script" style="overflow:auto;">
+            <div id="script_article" style="overflow:auto;">
             </div>
-            <div id="editorBox">
+            <div id="editorBox_article">
             </div>
           </div>
       </div>
@@ -449,17 +446,52 @@
  new WOW().init();
 </script>
 <script type="text/javascript">
+$('.js-example-basic- ').select2({
+  minimumInputLength: 2,
+  ajax:{
+    url:'api/topic',
+    data: function (params) {
+      console.log(params.term);
+      return {q:params.term};
+    },
+    type:'post',
+    delay: 500,
+    dataType:'json',
+    processResults: function (data, params) {
+      console.log(data);
+      return {
+        results: data
+      };    
+    },
+    cache:true,
+  },
+  templateResult:function formatRepo(topic){ 
+      return "<div class='select2-result-repository clearfix'>" +
 
-var E = window.wangEditor
-var editor2 = new E('#script','#editorBox')
-editor2.create()
+                "<div class='select2-result-repository__meta'>" +
+
+                "<div class='select2-result-repository__title'>" +
+
+                topic.topic ? topic.topic : "Laravel"   +
+
+                "</div></div></div>";
+    },
+    templateSelection:function formatRepoSelection(topic){ console.log(topic); return topic.topic || topic.topic;},
+});
+
+var E = window.wangEditor;
+var editor2 = new E('#script','#editorBox');
+editor2.create();
+
+var editor_article=new E('#script_article','#editorBox_article');
+editor_article.create();
 
 $('#ravensb').click(function(){
     $("#content").val(editor2.txt.html());
 });
 
 $('#ravensbq').click(function(){
-    $("#article_content").val(editor2.txt.html());
+    $("#article_content").val(editor_article.txt.html());
 });
 
 @foreach(array_keys($errors->toArray()) as $value)
@@ -505,71 +537,20 @@ $("#sendCode").click(function(){
 $('#{{isset($flag)?$flag:"home"}}').addClass("active");
 
 </script>
+<script src="{{asset('back_video/dist/vidbg.js')}}"></script>
 
 <script type="text/javascript">
-  function formatTopic (topic) {
-
-      return "<div class='select2-result-repository clearfix'>" +
-
-          "<div class='select2-result-repository__meta'>" +
-
-          "<div class='select2-result-repository__title'>" +
-
-          topic.name ? topic.name : "Laravel"   +
-
-          "</div></div></div>";
-  }
-
-
-  function formatTopicSelection (topic) {
-      console.log(topic);
-
-      return topic.name || topic.text;
-  }
-
-  $(".js-example-basic-multiple").select2({
-
-      tags: true,
-
-      placeholder: 'Insert Correlation Topic',
-
-      minimumInputLength: 2,
-
-      ajax: {
-
-          url: '/api/topic',
-
-          dataType: 'json',
-
-          delay: 250,
-
-          data: function (params) {
-
-              return {
-
-                  query: params.term
-
-              };
-
-          },
-
-          processResults: function (data, params) {
-              console.log(data);
-              return {
-                results: data
-              };
-          },
-          cache: true
-      },
-
-      templateResult: formatTopic,
-
-      templateSelection: formatTopicSelection,
-
-      escapeMarkup: function (markup) { return markup; }
-  });
-
-</script>
+    jQuery(function($){
+        $('.header').vidbg({
+            'mp4': 'back_video/video/Untitled.mkv',
+        }, {
+            // Options
+            muted: true,
+            loop: true,
+            overlay: true,
+        });
+    });
+  </script>
 <!-- //animation-effect -->
 </body>
 </html>

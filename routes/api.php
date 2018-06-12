@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,9 +26,23 @@ Route::group([
 
    	Route::post('send',"MailController@send");
 
-   	Route::get('topic',function(Request $request){
-   		$result=App\Topic::select(["topic","id"])->where("topic","like","%".$request->get("query")."%")->get();
+   	Route::post('topic',function(Request $request){
+   		$result=App\Topic::select(["topic","id"])->where("topic","like","%".$request->get("q")."%")->get();
    		return $result;
+   	});
+
+   	Route::post('avatar','AvatarController@store');
+
+   	Route::post('questioncontent',function(Request $request){
+   		return App\Question::find($request->id);
+   	});
+
+   	Route::post('updatecontent',function(Request $request){
+   		$question=App\Question::find($request->id);
+      $question->content=$request->content;
+      if($question->save()){
+        return 1;
+      }
    	});
 
 });
